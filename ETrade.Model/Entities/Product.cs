@@ -1,0 +1,15 @@
+﻿using ETrade.Core.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ETrade.Model.Entities
+{
+    public class Product : CoreEntity
+    {
+        public string ProductName { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+    }
+}
