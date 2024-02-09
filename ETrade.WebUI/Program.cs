@@ -1,3 +1,6 @@
+using ETrade.Model.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace ETrade.WebUI
 {
     public class Program
@@ -7,7 +10,10 @@ namespace ETrade.WebUI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddMvc();
+
+            builder.Services.AddDbContext<ETradeContext>(options =>options.UseSqlServer(
+                "Server=DESKTOP-CF4C8LU\\SQLEXPRESS;Database=ETrade;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
 
             var app = builder.Build();
 

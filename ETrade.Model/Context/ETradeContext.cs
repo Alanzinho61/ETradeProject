@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ETrade.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,8 @@ namespace ETrade.Model.Context
         public ETradeContext(DbContextOptions<ETradeContext> dbContextOptions) : base(dbContextOptions) 
         {
         }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        
     } 
 }

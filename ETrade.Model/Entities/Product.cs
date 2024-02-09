@@ -10,6 +10,12 @@ namespace ETrade.Model.Entities
     public class Product : CoreEntity
     {
         public string ProductName { get; set; } = string.Empty;
-        public decimal Price { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductStock { get; set; }
+        public string ProductDescription { get; set; } = string.Empty;
+        public int CategoryId { get; set; } // ForeingKey
+        public Category Category { get; set; } //Siralamasi onemli baglanti burada oluyir
+
+
     }
 }

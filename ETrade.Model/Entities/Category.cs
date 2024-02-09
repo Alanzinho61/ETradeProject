@@ -11,5 +11,8 @@ namespace ETrade.Model.Entities
     {
         public string CategoryName { get; set; } = string.Empty;
         public string CategoryDescription { get; set; } = string.Empty;
+
+        // Tablo baglantisi burada yapiliyor (iki tablo birbiriyle baglaniyor)
+        public ICollection<Product> Products { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace ETrade.Core.Service
         List<T> GetAll();
         T Get(int id);
         bool Save();
+        T Find (int id);
        
     }
 }
