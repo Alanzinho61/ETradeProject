@@ -1,0 +1,41 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Update</h1>
+
+<form asp-action="Update" asp-controller="Product" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+
+    <input type="text" name="ProductName" value="@Model.ProductName" placeholder="Kategori Adi" /> <br /> <br />
+    <input type="text" name="ProductDescription" value="@Model.ProductDescription" placeholder="Kategori Aciklamasi" /> <br /> <br />
+    <input type="text" name="ProductStock" value="@Model.ProductStock" placeholder="Kategori Adi" /> <br /> <br />
+    <input type="text" name="ProductPrice" value="@Model.ProductPrice" placeholder="Kategori Aciklamasi" /> <br /> <br />
+    <select class="form-select" aria-label="Default select example" name="CategoryId">
+        <option selected>Open this select menu</option>
+
+        @* @foreach (var item in ViewBag.Category)
+        {
+            <option value="@item.Id">@item.CategoryName</option>
+        } *@
+
+        @foreach (var item in ViewBag.Category)
+        {
+            if (item.Id == ViewBag.SelectedCategoryId)
+            {
+                <option value="@item.Id" selected>@item.CategoryName</option>
+            }
+            else
+            {
+                <option value="@item.Id">@item.CategoryName</option>
+            }
+        }
+    </select>
+
+
+    <input type="submit" value="Update" class="btn btn-success" />
+
+</form>

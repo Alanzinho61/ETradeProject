@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table table-sm">
+
+    <a href="/Admin/Product/Add" class="btn btn-success">Yeni Urun Ekle</a>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Adi</th>
+            <th scope="col">Product Aciklamasi</th>
+            <th scope="col">#</th>
+            <th scope="col">#</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ProductName</td>
+                <td>@item.ProductDescription</td>
+                <td>@item.ProductPrice</td>
+                <td>@item.ProductStock</td>
+                <td><a href="/Admin/Product/Update/@item.Id" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/Admin/Product/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>

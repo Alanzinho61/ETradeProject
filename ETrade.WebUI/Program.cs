@@ -1,4 +1,7 @@
+using ETrade.Core.Service;
 using ETrade.Model.Context;
+using ETrade.Service.DbService;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETrade.WebUI
@@ -15,6 +18,7 @@ namespace ETrade.WebUI
             builder.Services.AddDbContext<ETradeContext>(options =>options.UseSqlServer(
                 "Server=DESKTOP-CF4C8LU\\SQLEXPRESS;Database=ETrade;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
 
+            builder.Services.AddScoped(typeof(IDbService<>), typeof(CoreDbService<>)); //Once araci (Interface kullanilir) sonra hedef yazilir.
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -32,7 +36,17 @@ namespace ETrade.WebUI
 
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.MapAreaControllerRoute(
+                name: "Admin",
+                areaName:"Admin",
+                pattern: "Admin/{Controller=Home}/{Action=Index}/{id?}");
+
+            // Ana proje icin yonlendirme kurali
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{Controller=Home}/{Action=Index}/{id?}");
+
+            //app.MapRazorPages();
 
             app.Run();
         }

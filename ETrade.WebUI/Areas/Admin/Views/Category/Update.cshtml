@@ -1,0 +1,19 @@
+﻿@model ETrade.Model.Entities.Category
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Update</h1>
+
+@* <form action="/Admin/Category/Update" method="post"> *@
+<form asp-action="Index" asp-controller="Category" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+
+    <input type="text" name="CategoryName" value="@Model.CategoryName" placeholder="Kategori Adi" /> <br /> <br />
+    <input type="text" name="CategoryDescription" value="@Model.CategoryDescription" placeholder="Kategori Aciklamasi" /> <br /> <br />
+
+    <input type="submit" value="Update" class="btn btn-success" />
+
+</form>

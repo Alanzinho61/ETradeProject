@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ETrade.Model.Entities.Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Category</h1>
+
+
+@* @if(Model.Count()>0
+{
+    
+} *@
+
+<table class="table table-sm">
+
+    <a href="/Admin/Category/Add" class="btn btn-success">Yeni Kategori Ekle</a>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategori Adi</th>
+            <th scope="col">Kategori Aciklamasi</th>
+            <th scope="col">#</th>
+            <th scope="col">#</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CategoryDescription</td>
+                <td><a href="/Admin/Category/Update/@item.Id" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/Admin/Category/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>

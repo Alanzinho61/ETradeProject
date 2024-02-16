@@ -1,0 +1,31 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<h1>Add</h1>
+
+@* @if (ViewBag.ErrorAdd == null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorAdd
+    </div>
+} *@
+
+<form action="/Admin/Product/Add" method="post">
+
+    <input type="text" name="ProductName" placeholder="Urun Adi" /> <br />
+    <input type="text" name="ProductStock" placeholder="Urun Stogu" /> <br />
+    <input type="text" name="ProductPrice" placeholder="Kategori fiyati" /> <br />
+    <input type="text" name="ProductDescription" placeholder="Urun Aciklamasi" /> <br />
+    <select class="form-select" aria-label="Default select example" name="CategoryId">
+        <option selected>Open this select menu</option>
+
+        @foreach (var item in ViewBag.Category)
+        {
+            <option value="@item.Id">@item.CategoryName</option>
+        }
+    </select>
+    <input type="submit" value="Add" class="btn btn-success" />
+
+</form>

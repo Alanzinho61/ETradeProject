@@ -1,0 +1,15 @@
+﻿@model ETrade.Model.Entities.Category
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Add</h1>
+
+<form action="/Admin/Category/Add" method="post">
+
+    <input type="text" name="CategoryName" placeholder="Kategori Adi" /> <br />
+    <input type="text" name="CategoryDescription" placeholder="Kategori Aciklamasi" /> <br />
+    <input type="submit" value="Add" class="btn btn-success" />
+
+</form>
