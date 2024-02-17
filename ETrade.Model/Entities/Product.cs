@@ -13,8 +13,10 @@ namespace ETrade.Model.Entities
         public decimal ProductPrice { get; set; }
         public int ProductStock { get; set; }
         public string ProductDescription { get; set; } = string.Empty;
+        public string ImagePath { get; set; }
         public int CategoryId { get; set; } // ForeingKey
         public Category Category { get; set; } //Siralamasi onemli baglanti burada oluyir
+        
 
 
     }

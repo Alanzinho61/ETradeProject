@@ -9,11 +9,13 @@ namespace ETrade.WebUI.Areas.Admin.Controllers
     {
         private readonly IDbService<Product> _db;
         private readonly IDbService<Category> _Categorydb;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IDbService<Product> db, IDbService<Category> ctb)
+        public ProductController(IDbService<Product> db, IDbService<Category> ctb, IWebHostEnvironment cd)
         {
             _db = db;
             _Categorydb = ctb;
+            _webHostEnvironment = cd;
         }
         public IActionResult Index()
         {
@@ -30,10 +32,22 @@ namespace ETrade.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product p)
+        public IActionResult Add(Product p, IFormFile image)
         {
-            if (p != null) 
+            if (p != null)
             {
+                
+                var downloadImage = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                if (!Directory.Exists(downloadImage))
+                {
+                    Directory.CreateDirectory(downloadImage);
+                }
+                var imagePath = Path.Combine(downloadImage, image.FileName);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+                p.ImagePath = image.FileName;
                 _db.Add(p);
                 return RedirectToAction("Index");
             }
@@ -53,6 +67,17 @@ namespace ETrade.WebUI.Areas.Admin.Controllers
             if(p != null)
             {
                 _db.Update(p);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var delProduct=_db.Find(id);
+            if (delProduct != null)
+            {
+                _db.Remove(delProduct);
                 return RedirectToAction("Index");
             }
             return View();
