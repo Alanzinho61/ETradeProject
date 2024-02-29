@@ -1,0 +1,50 @@
+﻿@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Sepet Özeti</h1>
+
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Ürün ID</th>
+            <th scope="col">Ürün Adı</th>
+            <th scope="col">Adet Fiyatı</th>
+            <th scope="col">Adet</th>
+            <th scope="col">###</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.ShoppingCartItems)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ProductName</td>
+                <td>@item.ProductPrice</td>
+                <td>@item.Quantity</td>
+                <td><a asp-controller="Basket" asp-action="RemoveToCart" asp-route-productId="@item.Id" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+Sepetin Toplam Tutarı : <b>@Model.TotalAmount</b>
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Alışverişe Devam Et</a>
+            <a href="#" class="btn btn-success">Ödeme Yap</a>
+            <a asp-controller="Basket" asp-action="CartClear" class="btn btn-danger">Sepeti Boşalt</a>
+        </div>
+    </div>
+</div>

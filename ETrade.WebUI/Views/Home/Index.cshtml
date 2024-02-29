@@ -1,8 +1,27 @@
-﻿
+﻿@model IEnumerable<Category>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Main Page</h1>
+<h1>Urunler</h1>
 
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.CategoryName</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@item.CategoryDescription</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="/category/details/@item.Id" class="btn btn-primary">Urune Git</a>
+                    </div>
+                </div>
+            </div>
+          } 
+
+    </div>
+</div>

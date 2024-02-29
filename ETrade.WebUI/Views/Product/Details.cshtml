@@ -1,0 +1,28 @@
+﻿@model Product
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="~/images/@Model.ImagePath" class="img-fluid rounded-start" alt="..." >
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.ProductName</h5>
+                <p class="card-text">@Model.ProductDescription</p>
+                <p class="card-text">@Model.ProductStock</p>
+                <p class="card-text">@Model.ProductPrice</p>
+                @* <button type="button" class="btn btn-info">Satin Al</button> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-controller="Basket" asp-action="AddToCart" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="ProductName" value="@Model.ProductName" />
+    <input type="hidden" name="ProductPrice" value="@Model.ProductPrice" />
+    <input type="submit" class="btn btn-success" value="Sepete Ekle" />
+</form>

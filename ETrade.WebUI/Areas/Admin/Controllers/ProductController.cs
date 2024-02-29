@@ -36,7 +36,6 @@ namespace ETrade.WebUI.Areas.Admin.Controllers
         {
             if (p != null)
             {
-                
                 var downloadImage = Path.Combine(_webHostEnvironment.WebRootPath, "images");
                 if (!Directory.Exists(downloadImage))
                 {
@@ -62,10 +61,21 @@ namespace ETrade.WebUI.Areas.Admin.Controllers
             return View(_db.Find(id));
         }
         [HttpPost]
-        public IActionResult Update(Product p)
+        public IActionResult Update(Product p, IFormFile image)
         {
             if(p != null)
             {
+                if (image!=null)
+                {
+                    var downloadImage = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    var imagePath = Path.Combine(downloadImage, image.FileName);
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        image.CopyTo(stream);
+                    }
+                    p.ImagePath = image.FileName;
+                }
+
                 _db.Update(p);
                 return RedirectToAction("Index");
             }

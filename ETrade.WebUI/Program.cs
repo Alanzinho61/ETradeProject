@@ -19,6 +19,11 @@ namespace ETrade.WebUI
                 "Server=DESKTOP-CF4C8LU\\SQLEXPRESS;Database=ETrade;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
 
             builder.Services.AddScoped(typeof(IDbService<>), typeof(CoreDbService<>)); //Once araci (Interface kullanilir) sonra hedef yazilir.
+            //Session kullanimi
+            builder.Services.AddSession(options => {
+                options.Cookie.Name = "basket";
+                options.IdleTimeout=TimeSpan.FromMinutes(30);
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,6 +36,8 @@ namespace ETrade.WebUI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
